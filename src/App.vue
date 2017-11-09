@@ -6,43 +6,68 @@
     <li v-for="item in list" v-text="item.name+'-'+item.price">
       {{item.name}} - {{item.price}}
     </li>
+      {{status?'success':'fail'}}
     </ul>
-    <button @click="addItem">addItem</button>
-    <p v-html="hello"></p>
+    <button @click="addItem" :style="linkCss">addItem</button>
+    <a :href="link" class="link-href" :class="className">to baidu</a>
+    <p v-html="hello" :class="[classA,{'red-font':hasError}]"></p>
+
+    <a v-if="isPartA">PartA</a>
+    <a v-else>no data</a>
+    <a v-show="!isPartA">PartB</a>
+    <button @click="toggle">toggle</button>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data(){
-    return{
-      hello:'<span><img>world</span>',
-      list: [
-        {
-          name:'apple',
-          price:15
+  import Vue from 'vue'
+  export default {
+    name: 'app',
+    data(){
+      return{
+        hello:'<span><img>world</span>',
+        link:'www.baidu.com',
+        num:1,
+        status:true,
+        isPartA:true,
+        className:{
+          'red-font':true,
+          'blue-font':false
         },
-        {
-          name:'banana',
-          price:11
+        linkCss:{
+          'color':'red',
+          'font-size':'24px'
         },
-        {
-          name:'orange',
+        classA:'hello',
+        hasError:true,
+        list: [
+          {
+            name:'apple',
+            price:15
+          },
+          {
+            name:'banana',
+            price:11
+          },
+          {
+            name:'orange',
+            price:123
+          },
+        ]
+      }
+    },
+    methods:{
+      addItem(){
+        Vue.set(this.list,1,{
+          name :'orange',
           price:123
-        },
-      ]
-    }
-  },
-  methods:{
-    addItem(){
-      this.list.push({
-        name:'orange',
-        price:123
-      })
+        })
+      },
+      toggle(){
+        this.isPartA = !this.isPartA
+      }
     }
   }
-}
 </script>
 
 <style>
