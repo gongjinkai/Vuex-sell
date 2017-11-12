@@ -19,6 +19,7 @@
     <input type="text" v-model="myValue">
     <br>
     {{myValueWithoutNum}}
+    <input type="text" @keydown.enter="onKeydown()">
   </div>
 </template>
 
@@ -74,6 +75,9 @@
       },
       toggle(){
         this.isPartA = !this.isPartA
+      },
+      onKeydown(){
+        console.log('on key down')
       }
     }
   }
