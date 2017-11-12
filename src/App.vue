@@ -16,6 +16,9 @@
     <a v-else>no data</a>
     <a v-show="!isPartA">PartB</a>
     <button @click="toggle">toggle</button>
+    <input type="text" v-model="myValue">
+    <br>
+    {{myValueWithoutNum}}
   </div>
 </template>
 
@@ -25,6 +28,7 @@
     name: 'app',
     data(){
       return{
+        myValue: '',
         hello:'<span><img>world</span>',
         link:'www.baidu.com',
         num:1,
@@ -54,6 +58,11 @@
             price:123
           },
         ]
+      }
+    },
+    computed: {
+      myValueWithoutNum () {
+        return this.myValue+ 'end'
       }
     },
     methods:{
