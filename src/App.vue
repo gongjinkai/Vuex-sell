@@ -20,17 +20,38 @@
     <br>
     {{myValueWithoutNum}}
     <input type="text" @keydown.13="onKeydown()">
+    <com-a @my-event="onComaMyEvent"></com-a>
+    <input type="checkbox" v-model="myBox" value="apple">
+    <input type="checkbox" v-model="myBox" value="banana">
+    <input type="checkbox" v-model="myBox" value="pinapple">
+    {{myBox}}
+    <select v-model="selection">
+      <option v-for="item in selectOption" :value="item.value">{{item.text}}</option>
+    </select>
+      {{selection}}
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
-  import comA
+  import comA from './components/a'
   export default {
     name: 'app',
     data(){
       return{
+        selectOption:[
+          {
+            text: 'apple',
+            value: 0
+          },
+          {
+            text: 'banana',
+            value: 1
+          }
+        ],
+        selection: null,
         myValue: '',
+        myBox:[],
         hello:'<span><img>world</span>',
         link:'www.baidu.com',
         num:1,
@@ -62,6 +83,9 @@
         ]
       }
     },
+    components:{
+      comA
+    },
     computed: {
       myValueWithoutNum () {
         return this.myValue+ 'end'
@@ -79,6 +103,9 @@
       },
       onKeydown(){
         console.log('on key down')
+      },
+      onComaMyEvent(parmfromA){
+        console.log('onComaMyEvent' + parmfromA)
       }
     }
   }
