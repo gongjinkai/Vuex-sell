@@ -19,12 +19,13 @@
     <input type="text" v-model="myValue">
     <br>
     {{myValueWithoutNum}}
-    <input type="text" @keydown.enter="onKeydown()">
+    <input type="text" @keydown.13="onKeydown()">
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
+  import comA
   export default {
     name: 'app',
     data(){
