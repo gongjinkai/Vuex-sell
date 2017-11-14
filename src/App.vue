@@ -87,6 +87,14 @@
     components:{
       comA
     },
+    watch:{
+      myValue:((val,oldVal)=>{
+        console.log(val,oldVal)
+      }),
+      list:function(){
+        this.tellUser()
+      }
+    },
     computed: {
       myValueWithoutNum () {
         return this.myValue.replace(/\d/g,'')
@@ -98,6 +106,19 @@
           name :'orange',
           price:123
         })
+      },
+      changeList(){
+        Vue.set(this.myList,1,{
+          name:"pinapple",
+          price:256
+        });
+        //this.tellUser()
+      },
+      removeItem(){
+        //this.tellUser()
+      },
+      tellUser(){
+        alert('list change')
       },
       toggle(){
         this.isPartA = !this.isPartA
