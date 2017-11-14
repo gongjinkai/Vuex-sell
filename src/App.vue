@@ -16,9 +16,10 @@
     <a v-else>no data</a>
     <a v-show="!isPartA">PartB</a>
     <button @click="toggle">toggle</button>
-    <input type="text" v-model="myValue">
+    <input type="text" v-model.lazy="myValue">
     <br>
     {{myValueWithoutNum}}
+    {{getMyValWithoutNum()}}
     <input type="text" @keydown.13="onKeydown()">
     <com-a @my-event="onComaMyEvent"></com-a>
     <input type="checkbox" v-model="myBox" value="apple">
@@ -88,7 +89,7 @@
     },
     computed: {
       myValueWithoutNum () {
-        return this.myValue+ 'end'
+        return this.myValue.replace(/\d/g,'')
       }
     },
     methods:{
@@ -106,6 +107,9 @@
       },
       onComaMyEvent(parmfromA){
         console.log('onComaMyEvent' + parmfromA)
+      },
+      getMyValWithoutNum(){
+        return this.myValue.replace(/\d/g,'')
       }
     }
   }
