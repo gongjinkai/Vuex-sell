@@ -21,7 +21,7 @@
     {{myValueWithoutNum}}
     {{getMyValWithoutNum()}}
     <input type="text" @keydown.13="onKeydown()">
-    <com-a @my-event="onComaMyEvent"></com-a>
+    <com-a @my-event="onComaMyEvent" number-to-do=78></com-a>
     <input type="checkbox" v-model="myBox" value="apple">
     <input type="checkbox" v-model="myBox" value="banana">
     <input type="checkbox" v-model="myBox" value="pinapple">
