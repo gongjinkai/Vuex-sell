@@ -21,7 +21,9 @@
     {{myValueWithoutNum}}
     {{getMyValWithoutNum()}}
     <input type="text" @keydown.13="onKeydown()">
-    <com-a @my-event="onComaMyEvent" number-to-do=78></com-a>
+    <com-a @my-event="onComaMyEvent" :my-value='myValue'>
+      <p>slot里面的文字</p>
+    </com-a>
     <input type="checkbox" v-model="myBox" value="apple">
     <input type="checkbox" v-model="myBox" value="banana">
     <input type="checkbox" v-model="myBox" value="pinapple">
@@ -126,7 +128,7 @@
       onKeydown(){
         console.log('on key down')
       },
-      onComaMyEvent(parmfromA){
+      onComaMyEvent(parmfromA){                    //参数为子组件发射的数据
         console.log('onComaMyEvent' + parmfromA)
       },
       getMyValWithoutNum(){
