@@ -3,7 +3,9 @@
     {{hello}}
     {{myValue}}
     <button @click="emitMyEvent">emit</button>
-    <slot>no slot</slot>
+    <slot name="header">no header</slot>
+    <slot name="content">luan qi ba zao </slot>
+    <slot name="footer">no footer</slot>
   </div>
 </template>
 <script type="text/ecmascript-6">

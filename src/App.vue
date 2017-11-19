@@ -2,6 +2,9 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view></router-view>
+    <keep-alive>                      <!--缓存-->
+    <p :is="currentView"></p>         <!--动态组件-->
+    </keep-alive>
     <ul>
     <li v-for="item in list" v-text="item.name+'-'+item.price">
       {{item.name}} - {{item.price}}
@@ -22,7 +25,9 @@
     {{getMyValWithoutNum()}}
     <input type="text" @keydown.13="onKeydown()">
     <com-a @my-event="onComaMyEvent" :my-value='myValue'>
-      <p>slot里面的文字</p>
+      <p slot="header">xxx header</p>
+      <p slot="content">xxx content</p>
+      <p slot="footer">xxx footer</p>
     </com-a>
     <input type="checkbox" v-model="myBox" value="apple">
     <input type="checkbox" v-model="myBox" value="banana">
@@ -32,6 +37,17 @@
       <option v-for="item in selectOption" :value="item.value">{{item.text}}</option>
     </select>
       {{selection}}
+    <br>
+    <br>
+
+    <!--transition-->
+    <transition name="fade">
+      <p v-show="show">我是VUE动画</p>
+    </transition>
+    <transition name="my-trans">
+      <p v-show="show">我是VUE动画</p>
+    </transition>
+    <button @click="show=!show">触发</button>
   </div>
 </template>
 
@@ -42,6 +58,7 @@
     name: 'app',
     data(){
       return{
+        currentView: 'com-a',
         selectOption:[
           {
             text: 'apple',
@@ -83,7 +100,8 @@
             name:'orange',
             price:123
           },
-        ]
+        ],
+        show: true
       }
     },
     components:{
@@ -139,12 +157,29 @@
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+  .fade-enter-active, .fade-leave-active{
+    transition: all .5s ease-out;
+  }
+  .fade-enter, .fade-leave-active{
+    opacity: 0;
+  }
+  .my-trans-active, .my-trans-leave-active{
+    transition: all .5s ease-out;
+  }
+  .my-trans-enter{
+    transform: translateX(-500px);
+    opacity: 0;
+  }
+  .my-trans-leave-active{
+    transform: translateX(500px);
+    opacity: 0;
+  }
 </style>
