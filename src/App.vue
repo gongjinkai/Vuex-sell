@@ -59,7 +59,7 @@
        <p class="animate-p" v-show="show"> i am show</p>
       </transition>
     </div>
-
+    <p id="hook-arguments-example" v-demo:foo.a.b="message">green green green</p>
   </div>
 </template>
 
@@ -71,6 +71,7 @@
     data(){
       return{
         currentView: 'com-a',
+        message: 'hello!',
         selectOption:[
           {
             text: 'apple',
@@ -117,8 +118,15 @@
       }
     },
     directives: {
-      color: function (el, binding) {
-        el.style.color = binding.value
+      demo:function(el,binding,vnode){
+        var s = JSON.stringify;
+        el.innerHTML =
+          'name: '       + s(binding.name) + '<br>' +
+          'value: '      + s(binding.value) + '<br>' +
+          'expression: ' + s(binding.expression) + '<br>' +
+          'argument: '   + s(binding.arg) + '<br>' +
+          'modifiers: '  + s(binding.modifiers) + '<br>' +
+          'vnode keys: ' + Object.keys(vnode).join(', ')
       }
     },
     components: {
@@ -176,10 +184,22 @@
           opacity: 0
         })
       },
-      enter:function (el) {
-        $(el).css({
+      enter:function (el,done) {
+        $(el).animate({
           left: 0,
-          opactiy
+          opacity: 1
+        },{
+          duration: 1500,
+          complete: done
+        })
+      },
+      leave:function (el,done) {
+        $(el).animate({
+          left: '500px',
+          opacity: 0
+        },{
+          duration: 1500,
+          complete: done
         })
       }
     }
