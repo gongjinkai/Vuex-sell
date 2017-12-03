@@ -48,6 +48,18 @@
       <p v-show="show">我是VUE动画</p>
     </transition>
     <button @click="show=!show">触发</button>
+    <br>
+    <br>
+    <div class="ab">
+      <transition
+      v-on:before-Enter="enter"
+      v-on:enter="enter"
+      v-on:leave="leave"
+      v-bind:css="false">
+       <p class="animate-p" v-show="show"> i am show</p>
+      </transition>
+    </div>
+
   </div>
 </template>
 
@@ -104,7 +116,12 @@
         show: true
       }
     },
-    components:{
+    directives: {
+      color: function (el, binding) {
+        el.style.color = binding.value
+      }
+    },
+    components: {
       comA
     },
     watch:{
@@ -151,6 +168,19 @@
       },
       getMyValWithoutNum(){
         return this.myValue.replace(/\d/g,'')
+      },
+      //animate
+      beforeEnter:function (el) {
+        $(el).css({
+          left: '-500px',
+          opacity: 0
+        })
+      },
+      enter:function (el) {
+        $(el).css({
+          left: 0,
+          opactiy
+        })
       }
     }
   }
