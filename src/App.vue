@@ -39,7 +39,6 @@
       {{selection}}
     <br>
     <br>
-
     <!--transition-->
     <transition name="fade">
       <p v-show="show">我是VUE动画</p>
@@ -60,6 +59,11 @@
       </transition>
     </div>
     <p id="hook-arguments-example" v-demo:foo.a.b="message">green green green</p>
+
+    //动态路由
+    <li v-for="item in lists">
+      <router-link :to="'/List/'+item.id">{{item.title}}</router-link>
+    </li>
   </div>
 </template>
 
@@ -114,7 +118,21 @@
             price:123
           },
         ],
-        show: true
+        show: true,
+        lists:[
+          {
+            id:1,
+            title: '标题1'
+          },
+          {
+            id:2,
+            title: '标题2'
+          },
+          {
+            id:3,
+            title: '标题3'
+          }
+        ]
       }
     },
     directives: {
@@ -136,6 +154,9 @@
       myValue:((val,oldVal)=>{
         console.log(val,oldVal)
       }),
+      '$route': function () {
+        this.id = this.$route.params.id
+      },
       list:function(){
         this.tellUser()
       }
