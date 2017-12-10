@@ -24,6 +24,9 @@
     {{myValueWithoutNum}}
     {{getMyValWithoutNum()}}
     <input type="text" @keydown.13="onKeydown()">
+    <br>
+
+
     <com-a @my-event="onComaMyEvent" :my-value='myValue'>
       <p slot="header">xxx header</p>
       <p slot="content">xxx content</p>
@@ -87,7 +90,7 @@
           }
         ],
         selection: null,
-        myValue: '',
+        myValue: 'props传的值',
         myBox:[],
         hello:'<span><img>world</span>',
         link:'www.baidu.com',

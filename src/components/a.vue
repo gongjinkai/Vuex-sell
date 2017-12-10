@@ -19,6 +19,9 @@ export default {
       world: 'i am world'
     }
   },
+  mounted:function(){
+    console.log(this.myValue);
+  },
   methods: {
     emitMyEvent(){
       this.$emit('my-event',this.world)
