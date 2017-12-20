@@ -4,17 +4,31 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      id: ''
+
+  /**
+   * 等同于下面的写法
+   * @type {{name: string, data: (function())}}
+   */
+  let com = {
+    name: 'xiaoxiao',
+    data () {
+      return {
+        msg: "welcome to Your Vue.js App"
+      }
     }
-  },
-  mounted () {
-    this.id = this.$route.params.id;
-    console.log(this.id)
-  },
-}
+  };
+  export { com }
+  export default {
+    data () {
+      return {
+        id: ''
+      }
+    },
+    mounted () {
+      this.id = this.$route.params.id;
+      console.log(this.id)
+    },
+  }
 </script>
 <style>
 

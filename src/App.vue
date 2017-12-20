@@ -67,12 +67,15 @@
     <li v-for="item in lists">
       <router-link :to="'/List/'+item.id">{{item.title}}</router-link>
     </li>
+    <img :src="'www.baidu.com' + imgurl">
+    <img src="http://www.baidu.com">
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
   import comA from './components/a'
+  import { com } from './components/list'
   export default {
     name: 'app',
     data(){
@@ -95,6 +98,7 @@
         hello:'<span><img>world</span>',
         link:'www.baidu.com',
         num:1,
+        imgurl: '5165165',
         status:true,
         isPartA:true,
         className:{
